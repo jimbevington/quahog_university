@@ -33,4 +33,14 @@ public class TestStudent {
         List<Student> students = DBHelper.getAll(Student.class);
         assertEquals(1, students.size());
     }
+
+    @Test
+    public void canUpdate() {
+        Student found = DBHelper.find(Student.class, student.getId());
+        found.setName("Barbara");
+        DBHelper.update(found);
+        found = DBHelper.find(Student.class, student.getId());
+        assertEquals("Barbara", found.getName());
+
+    }
 }

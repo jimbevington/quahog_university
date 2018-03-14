@@ -27,6 +27,20 @@ public class DBHelper {
         }
     }
 
+    public static void update(Object object) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.update(object);
+            transaction.commit();
+        } catch (HibernateException ex){
+            transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
     public static void delete(Object object) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -48,6 +62,14 @@ public class DBHelper {
             Criteria cr = session.createCriteria(Student.class);
             students = getList(cr);
             return students;
+    }
+
+    public static <T> T find(Class classType, int id) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        T result = null;
+        Criteria cr = session.createCriteria(classType);
+        result = getUnique(cr);
+        return result;
     }
 
     public static <T> List<T> getList(Criteria criteria){
