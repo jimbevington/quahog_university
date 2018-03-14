@@ -75,10 +75,7 @@ public class Student {
         this.course = course;
     }
 
-    @ManyToMany
-    @JoinTable(name = "student_lesson",
-        joinColumns = {@JoinColumn(name="student_id", nullable = false, updatable = false)},
-        inverseJoinColumns = {@JoinColumn(name="lesson_id", nullable = false, updatable = false)})
+    @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
     public Set<Lesson> getLessons() {
         return lessons;
     }

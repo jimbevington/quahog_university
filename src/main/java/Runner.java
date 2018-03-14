@@ -21,8 +21,13 @@ public class Runner {
         Student student2 = new Student("June", 99, 12346, course1);
         DBHelper.save(student2);
 
+        Course foundCourse = DBHelper.find(Course.class, course1.getId());
+        foundCourse.setLevel("MA");
+        DBHelper.update(foundCourse);
+        foundCourse = DBHelper.find(Course.class, course1.getId());
+
         Student foundStudent = DBHelper.find(Student.class, student1.getId());
-        Lesson foundLesson = DBHelper.find(Lesson.class, lesson1.getId());
+        Lesson foundLesson = DBHelper.find(Lesson.class, lesson2.getId());
 
         DBHelper.addStudentToLesson(foundStudent, foundLesson);
 

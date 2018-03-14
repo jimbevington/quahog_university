@@ -1,6 +1,5 @@
 package models;
 
-import com.sun.tools.javah.Gen;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -65,7 +64,10 @@ public class Lesson {
         this.course = course;
     }
 
-    @ManyToMany(mappedBy = "lessons", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "student_lesson",
+            joinColumns = {@JoinColumn(name="lesson_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="student_id", nullable = false, updatable = false)})
     public Set<Student> getStudents() {
         return students;
     }
