@@ -50,7 +50,7 @@ public class Course {
         this.level = level;
     }
 
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course")
     public Set<Student> getStudents() {
         return students;
     }
@@ -59,7 +59,7 @@ public class Course {
         this.students = students;
     }
 
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course")
     public Set<Lesson> getLessons() {
         return lessons;
     }

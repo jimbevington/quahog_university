@@ -3,6 +3,8 @@ import models.Course;
 import models.Lesson;
 import models.Student;
 
+import java.util.List;
+
 public class Runner {
 
     public static void main(String[] args) {
@@ -18,6 +20,15 @@ public class Runner {
         DBHelper.save(student1);
         Student student2 = new Student("June", 99, 12346, course1);
         DBHelper.save(student2);
+
+        Student foundStudent = DBHelper.find(Student.class, student1.getId());
+        Lesson foundLesson = DBHelper.find(Lesson.class, lesson1.getId());
+
+        DBHelper.addStudentToLesson(foundStudent, foundLesson);
+
+        List<Student> allStudents = DBHelper.getAll(Student.class);
+        List<Lesson> allLessons = DBHelper.getAll(Lesson.class);
+        List<Course> allCourses = DBHelper.getAll(Course.class);
 
     }
 

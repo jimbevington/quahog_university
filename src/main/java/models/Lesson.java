@@ -65,7 +65,7 @@ public class Lesson {
         this.course = course;
     }
 
-    @ManyToMany(mappedBy = "lessons", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "lessons", fetch = FetchType.EAGER)
     public Set<Student> getStudents() {
         return students;
     }
