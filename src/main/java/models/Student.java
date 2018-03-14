@@ -1,8 +1,12 @@
 package models;
 
+import javax.annotation.Generated;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name="students")
 public class Student {
 
     private int id;
@@ -23,6 +27,9 @@ public class Student {
         this.lessons = new HashSet<Lesson>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -31,6 +38,7 @@ public class Student {
         this.id = id;
     }
 
+    @Column(name="name")
     public String getName() {
         return name;
     }
@@ -39,6 +47,7 @@ public class Student {
         this.name = name;
     }
 
+    @Column(name = "age")
     public int getAge() {
         return age;
     }
@@ -47,6 +56,7 @@ public class Student {
         this.age = age;
     }
 
+    @Column(name = "enrolmentNo")
     public int getEnrolmentNo() {
         return enrolmentNo;
     }
@@ -55,6 +65,8 @@ public class Student {
         this.enrolmentNo = enrolmentNo;
     }
 
+    @ManyToOne
+    @JoinColumn(name="course", nullable = false)
     public Course getCourse() {
         return course;
     }
@@ -63,6 +75,10 @@ public class Student {
         this.course = course;
     }
 
+    @ManyToMany
+    @JoinTable(name = "student_lesson",
+        joinColumns = {@JoinColumn(name="student_id", nullable = false, updatable = false)},
+        inverseJoinColumns = {@JoinColumn(name="lesson_id", nullable = false, updatable = false)})
     public Set<Lesson> getLessons() {
         return lessons;
     }

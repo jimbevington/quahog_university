@@ -1,5 +1,11 @@
 package models;
 
+import com.sun.tools.javah.Gen;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="lessons")
 public class Lesson {
 
     private int id;
@@ -16,6 +22,9 @@ public class Lesson {
         this.course = course;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -24,6 +33,7 @@ public class Lesson {
         this.id = id;
     }
 
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -32,6 +42,7 @@ public class Lesson {
         this.title = title;
     }
 
+    @Column(name = "classroomNo")
     public int getClassroomNo() {
         return classroomNo;
     }
@@ -40,6 +51,8 @@ public class Lesson {
         this.classroomNo = classroomNo;
     }
 
+    @ManyToOne
+    @JoinColumn(name="course", nullable = false)
     public Course getCourse() {
         return course;
     }
