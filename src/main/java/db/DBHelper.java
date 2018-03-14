@@ -42,9 +42,13 @@ public class DBHelper {
     }
 
 
-//    public static List<Student> getAll(Class<Student> studentClass) {
-//
-//    }
+    public static List<Student> getAll(Class<Student> studentClass) {
+            session = HibernateUtil.getSessionFactory().openSession();
+            List<Student> students = null;
+            Criteria cr = session.createCriteria(Student.class);
+            students = getList(cr);
+            return students;
+    }
 
     public static <T> List<T> getList(Criteria criteria){
         List<T> results = null;

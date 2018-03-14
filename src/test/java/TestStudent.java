@@ -22,7 +22,9 @@ public class TestStudent {
 
     @Before
     public void setUp() throws Exception {
+        course = new Course("Basics", "HND");
         DBHelper.save(course);
+        student = new Student("Babs", 42, 98988, course);
         DBHelper.save(student);
     }
 
