@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,7 @@ public class Course {
     private String level;
     private Set<Student> students;
     private Set<Lesson> lessons;
+    private Set<Instructor> instructors;
 
     public Course() {
     }
@@ -19,6 +21,7 @@ public class Course {
     public Course(String title, String level) {
         this.title = title;
         this.level = level;
+        this.instructors = new HashSet<Instructor>();
     }
 
     @Id
@@ -66,5 +69,14 @@ public class Course {
 
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
+    public Set<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(Set<Instructor> instructors) {
+        this.instructors = instructors;
     }
 }

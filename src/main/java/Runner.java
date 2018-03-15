@@ -1,5 +1,6 @@
 import db.DBHelper;
 import models.Course;
+import models.Instructor;
 import models.Lesson;
 import models.Student;
 
@@ -10,6 +11,11 @@ public class Runner {
     public static void main(String[] args) {
         Course course1 = new Course("French", "PhD");
         DBHelper.save(course1);
+
+        Instructor instructor1 = new Instructor("Jim");
+        DBHelper.save(instructor1);
+        Instructor instructor2 = new Instructor("Alfred");
+        DBHelper.save(instructor2);
 
         Lesson lesson1 = new Lesson("Verbs", 4, course1);
         DBHelper.save(lesson1);
@@ -24,10 +30,11 @@ public class Runner {
         Course foundCourse = DBHelper.find(Course.class, course1.getId());
         foundCourse.setLevel("MA");
         DBHelper.update(foundCourse);
-        foundCourse = DBHelper.find(Course.class, course1.getId());
 
+        foundCourse = DBHelper.find(Course.class, course1.getId());
         Student foundStudent = DBHelper.find(Student.class, student1.getId());
         Lesson foundLesson = DBHelper.find(Lesson.class, lesson2.getId());
+        Instructor foundInstructor = DBHelper.find(Instructor.class, instructor1.getId());
 
         DBHelper.addStudentToLesson(foundStudent, foundLesson);
 
