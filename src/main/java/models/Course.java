@@ -79,4 +79,8 @@ public class Course {
     public void setInstructors(Set<Instructor> instructors) {
         this.instructors = instructors;
     }
+
+    public void addInstructor(Instructor instructor){
+        this.instructors.add(instructor);
+    }
 }
